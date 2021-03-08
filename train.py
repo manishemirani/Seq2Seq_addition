@@ -90,11 +90,6 @@ class Data_generation():
         x, y = self.one_hot(x, y)
         return x, y
 
-    def data_format(self):
-        x, y = self.random_generate()
-        return x, y
-
-
 max_number = 100
 max_sample = 1000
 max_random_data_length = len(str(max_number) + "+" + str(max_number))
