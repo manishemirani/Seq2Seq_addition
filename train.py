@@ -1,5 +1,5 @@
-from keras.models import Sequential
-from keras import layers
+from tensorflow.keras.models import Sequential
+from tensorflow.keras import layers
 import numpy as np
 
 symbols = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' ', '+']
@@ -90,14 +90,19 @@ class Data_generation():
         x, y = self.one_hot(x, y)
         return x, y
 
+    def data_format(self):
+        x, y = self.random_generate()
+        return x, y
+
+
 max_number = 100
-max_sample = 1000
+max_sample = 10000
 max_random_data_length = len(str(max_number) + "+" + str(max_number))
 n_times_repeatvector = int(np.log10(max_number) + 1)
 model = Sequential()
-model.add(layers.LSTM(155, input_shape=(max_random_data_length, len(symbols))))
+model.add(layers.LSTM(100, input_shape=(max_random_data_length, len(symbols))))
 model.add(layers.RepeatVector(n_times_repeatvector))
-model.add(layers.LSTM(68, return_sequences=True))
+model.add(layers.LSTM(50, return_sequences=True))
 model.add(layers.TimeDistributed(layers.Dense(len(symbols), activation='softmax')))
 
 model.compile(
@@ -106,8 +111,8 @@ model.compile(
     metrics=["acc"]
 )
 
-epochs = 120
-batch_size = 10
+epochs = 80
+batch_size = 100
 for i in range(epochs):
     x, y = genarate(symbols, max_number, max_sample, max_random_data_length)
     model.fit(
