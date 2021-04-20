@@ -2,8 +2,6 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras import layers
 import numpy as np
 
-symbols = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' ', '+']
-
 
 def genarate(symbols, max_number, max_sample, max_random_data_length):
     return Data_generation(symbols, max_number, max_sample
@@ -23,8 +21,12 @@ def test_preprocess(x, symbols):
     return ''.join(temp)
 
 
+def max_length(max_number):
+    return len(2 * str(max_number)) + 1
+
+
 class Data_generation():
-    Random_data = []
+    Random_data = None
 
     def __init__(self, symbols, max_number, max_sample, max_random_data_length):
         self.symbols = symbols
@@ -90,18 +92,15 @@ class Data_generation():
         x, y = self.one_hot(x, y)
         return x, y
 
-    def data_format(self):
-        x, y = self.random_generate()
-        return x, y
 
-
+symbols = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' ', '+']
 max_number = 100
-max_sample = 10000
-max_random_data_length = len(str(max_number) + "+" + str(max_number))
-n_times_repeatvector = int(np.log10(max_number) + 1)
+max_sample = 40000
+max_random_data_length = max_length(max_number)
+n_times_repeat_vector = int(np.log10(max_number) + 1)
 model = Sequential()
 model.add(layers.LSTM(100, input_shape=(max_random_data_length, len(symbols))))
-model.add(layers.RepeatVector(n_times_repeatvector))
+model.add(layers.RepeatVector(n_times_repeat_vector))
 model.add(layers.LSTM(50, return_sequences=True))
 model.add(layers.TimeDistributed(layers.Dense(len(symbols), activation='softmax')))
 
@@ -111,7 +110,7 @@ model.compile(
     metrics=["acc"]
 )
 
-epochs = 80
+epochs = 25
 batch_size = 100
 for i in range(epochs):
     x, y = genarate(symbols, max_number, max_sample, max_random_data_length)
@@ -122,10 +121,36 @@ for i in range(epochs):
         batch_size=batch_size
     )
 
-x, y = genarate(symbols, max_number, max_sample, max_random_data_length)
+    if i % 4 == 0 and i != 0:
+        test_x, _ = genarate(symbols, max_number, max_sample, max_random_data_length)
+        test_format = return_format()
+        result = model.predict(test_x, batch_size=batch_size)
+        predict = [test_preprocess(x, symbols) for x in result]
+        temp = 0
+        for data in test_format:
+            data1, data2 = data.split("+")
+            if int(data1) + int(data2) == int(predict[temp]):
+                print("{}= {}".format(test_format[temp], predict[temp]), "(correct)")
+            else:
+                print("{}= {}".format(test_format[temp], predict[temp]), "(incorrect)",
+                      "(correct) = {}".format(int(data1) + int(data2)))
+            temp += 1
+            if temp == 4:
+                break
+
+x, _ = genarate(symbols, max_number, max_sample, max_random_data_length)
 test_format = return_format()
-result = model.predict(x, batch_size=batch_size, verbose=0)
+result = model.predict(x, batch_size=batch_size)
 predict = [test_preprocess(x, symbols) for x in result]
 
-for i in range(15):
-    print("{}= {}".format(test_format[i], predict[i]))
+i = 0
+for data in test_format:
+    data1, data2 = data.split("+")
+    if int(data1) + int(data2) == int(predict[i]):
+        print("{}= {}".format(test_format[i], predict[i]), "(correct)")
+    else:
+        print("{}= {}".format(test_format[i], predict[i]), "(incorrect)",
+              "(correct) = {}".format(int(data1) + int(data2)))
+    i += 1
+    if i == 10:
+        break
