@@ -21,6 +21,7 @@
 # With jax and flax
 ## training_with_flax.py
 I just wrote a code to do a training task
+        
         train epoch: 50, loss: 0.14621692895889282, accuracy: 89.24999833106995
         train epoch: 51, loss: 0.12401988357305527, accuracy: 91.9374942779541
         train epoch: 52, loss: 0.12541252374649048, accuracy: 90.37500023841858
