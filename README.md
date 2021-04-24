@@ -1,5 +1,5 @@
 # Seq2Seq_addition
-
+Trains a LSTM model to do addition task
 # With tensorflow
 ## training_with_tensorflow.py
         400/400 [==============================] - 3s 8ms/step - loss: 0.7426 - acc: 0.7251
@@ -21,6 +21,8 @@
 # With jax and flax
 ## training_with_flax.py
 I just wrote a code to do a training task
+
+Created LSTM with encoder-decoder architecture
 
 You can see the original project [here](https://github.com/google/flax/tree/master/examples/seq2seq)        
         
