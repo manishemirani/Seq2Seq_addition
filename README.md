@@ -1,8 +1,7 @@
 # Seq2Seq_addition
 
-This example trains a LSTM for addition task
-
-
+# With tensorflow
+## training_with_tensorflow.py
         400/400 [==============================] - 3s 8ms/step - loss: 0.7426 - acc: 0.7251
         400/400 [==============================] - 3s 8ms/step - loss: 0.7115 - acc: 0.7375
         400/400 [==============================] - 3s 8ms/step - loss: 0.6850 - acc: 0.7442
@@ -19,3 +18,12 @@ This example trains a LSTM for addition task
         77+91  = 168 (correct)
         98+28  = 126 (correct)
         66+11  = 78  (incorrect) (correct) = 77
+# With jax and flax
+## training_with_flax.py
+I just wrote a code to do a training task
+        train epoch: 50, loss: 0.14621692895889282, accuracy: 89.24999833106995
+        train epoch: 51, loss: 0.12401988357305527, accuracy: 91.9374942779541
+        train epoch: 52, loss: 0.12541252374649048, accuracy: 90.37500023841858
+        train epoch: 53, loss: 0.10723508894443512, accuracy: 93.81250143051147
+        train epoch: 54, loss: 0.10625441372394562, accuracy: 92.56249666213989
+        train epoch: 55, loss: 0.1099778413772583, accuracy: 91.99999570846558
