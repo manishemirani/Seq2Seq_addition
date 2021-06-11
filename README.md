@@ -20,9 +20,6 @@ Trains a LSTM model to do addition task
         66+11  = 78  (incorrect) (correct) = 77
 # With jax and flax
 ## training_with_flax.py
-I just wrote a code to do a training task
-
-Created LSTM with encoder-decoder architecture
 
 You can see the original project from [here](https://github.com/google/flax/tree/master/examples/seq2seq)        
         
