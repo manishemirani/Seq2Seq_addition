@@ -1,5 +1,5 @@
 # Seq2Seq_addition
-Trains a [LSTM](https://manishemirani.github.io/Long-Short-Term-Memory) model to do addition task
+Trains a [LSTM](https://manishemirani.github.io/Long-Short-Term-Memory) model to do addition task. I did that on [pictures](https://github.com/manishemirani/Seq2Seq-picture) as well
 # With tensorflow
 ## training_with_tensorflow.py
         400/400 [==============================] - 3s 8ms/step - loss: 0.7426 - acc: 0.7251
