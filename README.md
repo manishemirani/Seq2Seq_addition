@@ -1,7 +1,6 @@
 # Seq2Seq_addition
 Trains a [LSTM](https://manishemirani.github.io/Long-Short-Term-Memory) model to do addition task. I did that on [pictures](https://github.com/manishemirani/Seq2Seq-picture) as well
 # With tensorflow
-## training_with_tensorflow.py
         400/400 [==============================] - 3s 8ms/step - loss: 0.7426 - acc: 0.7251
         400/400 [==============================] - 3s 8ms/step - loss: 0.7115 - acc: 0.7375
         400/400 [==============================] - 3s 8ms/step - loss: 0.6850 - acc: 0.7442
@@ -19,8 +18,6 @@ Trains a [LSTM](https://manishemirani.github.io/Long-Short-Term-Memory) model to
         98+28  = 126 (correct)
         66+11  = 78  (incorrect) (correct) = 77
 # With jax and flax
-## training_with_flax.py
-
 You can see the original project from [here](https://github.com/google/flax/tree/master/examples/seq2seq)        
         
         train epoch: 50, loss: 0.14621692895889282, accuracy: 89.24999833106995
